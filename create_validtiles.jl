@@ -13,3 +13,16 @@ for zone in ZONES
         print(io,allcoords)
     end
 end
+
+TILECOORDS = [include("tiles/$zone") for zone in ZONES]
+for izone in 1:7
+    zone = ZONES[izone]
+    open("tiles_bin/$zone", "w") do f
+        write(f, length(TILECOORDS[izone]))
+        foreach(TILECOORDS[izone]) do coord
+            write(f, first(coord))
+            write(f, last(coord))
+        end
+    end
+end
+
